@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { getImageUrl } from "../../utils/image";
 import { HEROES } from "../../data/heroes";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -174,7 +175,9 @@ function Heroes() {
             }
           }).map((hero, index) => (
             <ImageListItem key={hero}>
-              <img src={getImageUrl(hero)} style={{ borderRadius: "4px" }} />
+              <Link to={`/heroes/${hero.localized_name}`}>
+                <img src={getImageUrl(hero)} style={{ borderRadius: "4px" }} />
+              </Link>
               <Typography>Name: {hero.localized_name}</Typography>
               <Typography variant="caption">
                 Role: {hero.roles.join()}

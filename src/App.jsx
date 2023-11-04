@@ -10,7 +10,7 @@ function App() {
       <Route element={<Home></Home>} path='/'></Route>
       <Route element={<Home></Home>} path='/home'></Route>
       <Route element={<Heroes></Heroes>} path='/heroes'></Route>
-      <Route element={<HeroDetail></HeroDetail>} path='/herodetail'></Route>
+      <Route element={<HeroDetail></HeroDetail>} path='/heroes/:name'></Route>
       <Route element={<Battle></Battle>} path='/battle'></Route>
       <Route element={<h1>404</h1>} path='*'></Route>
     </Routes>
