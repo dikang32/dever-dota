@@ -43,7 +43,7 @@ function HeroDetail() {
             href="/home"
             // onClick={handleClick}
           >
-            MUI
+            Dota 2 MUI
           </Link>
           ,
           <Link
