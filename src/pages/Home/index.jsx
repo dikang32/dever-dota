@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import Header from "../../components/header";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -19,8 +20,12 @@ function Home() {
           DOTA 2 MUI
         </Typography>
         <Stack direction="row" spacing={2}>
-          <Button variant="outlined">YOUR HEROES</Button>
-          <Button variant="contained">CREATE BATTLE</Button>
+          <Link to={"/heroes"}>
+            <Button variant="outlined">YOUR HEROES</Button>
+          </Link>
+          <Link to={"/battle"}>
+            <Button variant="contained">CREATE BATTLE</Button>
+          </Link>
         </Stack>
       </Box>
     </>

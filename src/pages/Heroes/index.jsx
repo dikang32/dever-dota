@@ -18,6 +18,7 @@ import Header from "../../components/header";
 import SearchIcon from "@mui/icons-material/Search";
 import { getImageUrl } from "../../utils/image";
 import { HEROES } from "../../data/heroes";
+import { useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +63,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Heroes() {
+  const [filterRole, setFilterRole] = useState("all");
+  const handleFilter = (e) => {
+    setFilterRole(e.target.value);
+  };
+
+  const [searchFilter, setSearchFilter] = useState("");
+  const handleSearch = (e) => {
+    setSearchFilter(e.target.value.toLowerCase());
+  };
+
   return (
     <>
       <Header></Header>
@@ -116,7 +127,7 @@ function Heroes() {
                 id="demo-simple-select-standard"
                 // value={age}
                 defaultValue={"all"}
-                // onChange={handleChange}
+                onChange={handleFilter}
                 label="role"
               >
                 <MenuItem value={"all"}>All</MenuItem>
@@ -142,21 +153,33 @@ function Heroes() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                onChange={handleSearch}
               />
             </Search>
           </CardContent>
         </Card>
         <ImageList sx={{ width: "100%" }} cols={4} gap={16}>
-          {HEROES.map((hero, index) => (
-            <>
-              <ImageListItem key={hero}>
-                <img src={getImageUrl(hero)} style={{ borderRadius: "4px" }} />
-                <Typography>Name: {hero.localized_name}</Typography>
-                <Typography variant="caption">
-                  Role: {hero.roles.join()}
-                </Typography>
-              </ImageListItem>
-            </>
+          {HEROES.filter((hero) => {
+            if (searchFilter) {
+              return (
+                hero.localized_name.toLowerCase().includes(searchFilter) &&
+                (filterRole === "all" || hero.roles.includes(filterRole))
+              );
+            } else {
+              if (filterRole === "all") {
+                return true;
+              } else {
+                return hero.roles.includes(filterRole);
+              }
+            }
+          }).map((hero, index) => (
+            <ImageListItem key={hero}>
+              <img src={getImageUrl(hero)} style={{ borderRadius: "4px" }} />
+              <Typography>Name: {hero.localized_name}</Typography>
+              <Typography variant="caption">
+                Role: {hero.roles.join()}
+              </Typography>
+            </ImageListItem>
           ))}
         </ImageList>
       </Box>
