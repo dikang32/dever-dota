@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import Header from "../../components/header";
 import { Link } from "react-router-dom";
+import Header from "../../components/header";
 
 function Home() {
   return (
